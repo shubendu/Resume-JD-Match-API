@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text and PDF Processing</title>
+    <title>Resume AI tool</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -59,16 +59,27 @@
     </style>
 </head>
 <body>
-    <h1>Text and PDF Processing</h1>
+    <h1>Resume AI tool</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <form action="/process_data_html" method="post" enctype="multipart/form-data">
-        <label for="text_data">Text Data:</label>
+        <label for="text_data">Please enter job descirption below:</label>
         <textarea id="text_data" name="text_data" rows="6" required></textarea>
 
-        <label for="pdf_file">PDF File:</label>
-        <!-- Update the file input to accept multiple files -->
-        <input type="file" id="pdf_file" name="pdf_file" accept=".pdf" multiple required>
+        <label for="document_file">Upload Resumes (PDF or DOCX):</label>
+        <input type="file" id="document_file" name="document_file" accept=".pdf, .docx" multiple required>
 
-        <button type="submit">Process Data</button>
+        <button type="submit">Predict score</button>
     </form>
 </body>
 </html>
+
